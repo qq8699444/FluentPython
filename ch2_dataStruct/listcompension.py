@@ -29,3 +29,5 @@ codes = array.array('I',(ord(symbol) for symbol in symbols))
 print(codes)
 
 ##
+
+##

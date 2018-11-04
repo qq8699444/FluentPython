@@ -93,3 +93,33 @@ defaultdict1["123"] = 123
 defaultdict1["999"] = 999
 print(defaultdict1[123])
 print(defaultdict1.get(123))
+
+
+print("#################################################")
+import  collections
+class strKeyDict(collections.UserDict):
+    def __missing__(self, key):
+        if isinstance(key,str):
+            raise KeyError(key)
+        return self[str(key)]
+
+    def __contains__(self, item):
+        return str(key) in self.data
+
+    def __setitem__(self, key, value):
+        self.data[str(key)] = value
+
+defaultdict1 = strKeyDict()
+defaultdict1["123"] = 123
+defaultdict1[999] = 999
+print(defaultdict1[123])
+print(defaultdict1.get("999"))
+
+
+print("#################################################")
+from types import MappingProxyType
+d = {"123":123}
+d_proxy = MappingProxyType(d)
+print(d_proxy)
+print(d_proxy["123"])
+d_proxy["123"] = "123"
